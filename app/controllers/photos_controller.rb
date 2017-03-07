@@ -10,14 +10,33 @@ class PhotosController < ApplicationController
 	end
 
 	def create
- 		@photo = Photo.new(params[:photo])
+ 		@photo = Photo.new(photo_params)
  		@photo.save
+
+		redirect_to photos_url
+	end
+
+	def update
+		 @photo = Photo.find(params[:id])
+		 @photo.update(photo_params)
+
+		 redirect_to photo_url(@photo)
+	end
+
+
+	def destroy
+		@photo = Photo.find(params[:id])
+		@photo.destroy
 
 		redirect_to photos_url
 	end
 
 	def show
 		@photo = Photo.find(params[:id])
+	end
+
+	def edit
+		@photoss = Photo.find(params[:id])
 	end
 
 	private
